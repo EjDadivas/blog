@@ -5,17 +5,14 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    $posts = Post::all();
+
     return view('posts',[
-        'posts' => $posts
+        'posts' =>  Post::all()
     ]);
 });
 
-Route::get('posts/{post}', function ($slug) {
-    //find a post by its slug and pass it in a view called post
-    //keyword: view, post
-    //Post is a class
+Route::get('posts/{post}', function (Post $post) {
     return view('post', [
-        'post' => Post::find($slug)
+        'post' => $post
     ]);
-})->where('post', '[A-z_\-]+');
+});
