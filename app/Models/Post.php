@@ -26,6 +26,9 @@ class Post extends Model
             //         ->where('categories.slug', $category)
             ->whereHas('category', fn($query) =>
             $query->where('slug', $category)));
+        $query->when($filters['author'] ?? false, fn($query, $author)=>
+            $query->whereHas('author', fn($query) =>
+            $query->where('username', $author)));
 
     }
     public function getRouteKeyName(): string
