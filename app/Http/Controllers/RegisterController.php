@@ -23,8 +23,9 @@ class RegisterController extends Controller
             'password' => ['required', 'min:7', 'max:255'],
         ]);
         // TODO: sign user in
-        session()->flash('success', 'Your account has been created');
-        User::create($attributes);
-        return redirect('/');
+        // session()->flash('success', 'Your account has been created');
+        $user = User::create($attributes);
+        auth()->login($user);
+        return redirect('/')->with('success', 'Your account has been created');
     }
 }
