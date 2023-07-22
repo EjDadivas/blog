@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -29,6 +30,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'health'
         ]);
 
+        $post = Post::factory()->create();
+
         Post::factory(5)->create([
             'user_id' => $user->id
         ]);
@@ -40,6 +43,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        Comment::factory(3)->create([
+            'post_id' => $post->id
+        ]);
 
         //if you don't refresh db at the start
         //if you only run seeders when your run
